@@ -18,6 +18,7 @@ body {
     top:0;
     left:0;
     z-index: 99999;
+    background: #fff;
     box-shadow: 3px 3px -8px #ddd;
 }
 
