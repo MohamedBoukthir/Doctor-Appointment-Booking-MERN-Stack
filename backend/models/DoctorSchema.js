@@ -1,17 +1,33 @@
 import mongoose from "mongoose";
 
 const DoctorSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  name: { type: String, required: true },
-  phone: { type: Number },
-  photo: { type: String },
-  ticketPrice: { type: Number },
+  email: { 
+    type: String, 
+    required: true, 
+    unique: true 
+  },
+  password: { 
+    type: String, 
+    required: true 
+  },
+  name: { 
+    type: String, 
+    required: true 
+  },
+  phone: { 
+    type: Number 
+  },
+  photo: { 
+    type: String 
+  },
+  ticketPrice: { 
+    type: Number 
+  },
   role: {
     type: String,
   },
 
-  // Fields for doctors only
+  // Unique fields for doctors only
   specialization: { type: String },
   qualifications: {
     type: Array,
