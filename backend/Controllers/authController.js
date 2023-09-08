@@ -4,6 +4,12 @@ import bcrypt from 'bcryptjs';
 import User from '../models/UserSchema.js';
 import Doctor from '../models/DoctorSchema.js';
 
+const generateToken = user => {
+    return jwt.sign({id:user_id, role: user.role}, process.env.JWT_KEY, {
+        expiresIn:'15d'
+    })
+}
+
 // register controller
 export const register = async(req, res) => {
 
@@ -66,9 +72,45 @@ export const register = async(req, res) => {
 
 // login controller
 export const login = async(req, res) => {
+
+    const { 
+        email
+    } = req.body
+
     try {
         
+        let user = null
+        const patient = await User.findOne({email})
+        const doctor = await Doctor.findOne({email})
+
+        if(patient){
+            user = patient
+        }
+        if(doctor){
+            user = doctor
+        }
+
+        // check if user exist or not
+        if(!user){
+            return res.status(404).json({ message: 'User Not Found' })
+        }
+
+        // compare password
+        const isPasswordMatch = await bcrypt.compare(req.body.password, user.password)
+
+        if(!isPasswordMatch){
+            return res.status(400).json({ status: false, message: 'Invalid Credentials' });
+        }
+
+        // get token
+        const token = generateToken(user);
+        const { password, role, appointments, ...rest } = user._doc
+
+        res
+            .status(200)
+            .json({status: true, message: 'Successfully Login', token, data:{...rest}, role});
+
     } catch (error) {
-        
+        res.status(500).json({ status: false, message: 'Failed To Login' });
     }
 }
