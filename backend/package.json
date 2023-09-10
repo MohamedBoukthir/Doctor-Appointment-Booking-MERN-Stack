@@ -9,7 +9,7 @@
     "start": "node index.js",
     "start-dev": "nodemon index.js"
   },
-  "author": "mohamed boukthir",
+  "author": "sameer",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
