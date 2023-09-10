@@ -18,7 +18,7 @@ const corsOptions = {
 };
 
 app.get("/", (req, res) => {
-  res.send("LOOOOOOOOOOOOL");
+  res.send("HELLO MEDICARE");
 });
 
 // middleware
