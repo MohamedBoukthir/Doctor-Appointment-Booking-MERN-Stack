@@ -4,6 +4,7 @@ import { BASE_URL } from "../config";
 import { toast } from "react-toastify";
 import { authContext } from "../context/authContext.jsx";
 import { useContext } from "react";
+import HashLoader from "react-spinners/HashLoader";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -23,7 +24,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${BASE_URL}/api/v1/auth/login`, {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +92,7 @@ const Login = () => {
               type="submit"
               className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
             >
-              Login
+              {loading ? <HashLoader size={25} color="#fff" /> : "Login"}
             </button>
           </div>
           <p className="mt-5 text-textColor text-center">

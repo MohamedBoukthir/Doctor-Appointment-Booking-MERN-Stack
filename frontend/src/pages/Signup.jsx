@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import signupImg from "../assets/images/signup.gif";
-import avatar from "../assets/images/doctor-img01.png";
 import { Link, useNavigate } from "react-router-dom";
 import uploadImageToCloudinary from "../utils/uploadCloudinary";
 import { BASE_URL } from "../config";
@@ -43,7 +42,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${BASE_URL}/api/v1/auth/register`, {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
